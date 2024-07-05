@@ -1,0 +1,11 @@
+.idea/
+logs/
+build/
+*.iml
+*.exe
+*.exe~
+.vendor
+build
+vendor
+/bin
+/resources/
