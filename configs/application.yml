@@ -1,0 +1,62 @@
+logging:
+  level:
+    root: DEBUG
+  file:
+    name: # logs/orgon.log
+    format: TEXT
+
+datasource:
+  url: localhost:1521/orcl
+  schema: orgon
+  username: orgon
+  password: orgon
+  connection_pool:
+    max_open_conns: 25
+    max_idle_conns: 5
+    max_life_time: 60
+    max_idle_time: 60
+
+kafka:
+  brokers: ["localhost:9092"]
+  batch_size: 50
+  batch_timeout: 10
+  required_acks: one
+  compress: true
+  topic_auto_create: false
+  max_request_size: 4194304
+
+runner:
+  max_workers: 200
+  repeat_policy:
+    backoff_coefficient: 5
+    initial_interval: 1000
+    max_interval: 25000
+
+tasks:
+  task_1:
+    group_id: group_1
+    part_count: 42
+    batch_size: 100
+    topic: topic_1
+    query:
+      columns: "*"
+      from: test_tab
+      pk_column: id
+  task_2:
+    group_id: group_2
+    part_count: 42
+    batch_size: 100
+    topic: topic_2
+    query:
+      columns: id, rowid, rownum
+      from: test_tab
+      pk_column: id
+  task_3:
+    group_id: group_3
+    part_count: 42
+    batch_size: 100
+    topic: topic_3
+    query:
+      columns: "*"
+      from: select t1.*, t2.id as aux_id from test_tab t1, test_tab t2 where t1.id = t2.id
+      pk_column: id
