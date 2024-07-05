@@ -71,14 +71,14 @@ Typical data flow (presented in the picture):
 
 1. Create DB Orgonaut user.
 2. Login to Oracle as Orgonaut user.
-3. Execute [install.sql](scripts%2Fsql%2Finstall.sql): 
+3. Execute [install.sql](scripts/sql/install.sql): 
 ```shell
 sql>@install.sql
 ``` 
 
 ### Configuration
 
-Set up the configuration parameters in [application.yml](configs%2Fapplication.yml).
+Set up the configuration parameters in [application.yml](configs/application.yml).
 
 * Logging:
 ```yaml
